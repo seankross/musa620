@@ -1,0 +1,60 @@
+# Big
+
+## Still Big
+
+#### Smaller
+
+Hello! My name is Sean. This class is super fun.
+Hello! My name is Sean. This class is super fun.
+Hello! My name is Sean. This class is super fun.
+Hello! My name is Sean. This class is super fun.
+
+Hello! My name is Sean. This class is super fun.
+Hello! My name is Sean. This class is super fun.
+Hello! My name is Sean. This class is super fun.
+Hello! My name is Sean. This class is super fun.
+
+*Italics*
+
+**Bold**
+
+***Italics and Bold***
+
+Run this command: `render("index.Rmd")`
+
+This code is actually run! `r 2+2`
+
+```
+x = 5
+z = 10
+x * z
+```
+
+```{r}
+library(leaflet)
+
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng=174.768, lat=-36.852)
+```
+
+---
+
+- item 1
+- item 2
+- item 3
+
+1. yes
+2. wow
+3. cool
+
+| Column 1 | Column 2 | Column 3 |
+|---|---|---|
+| 1 | 2 | 3 |
+| 1 | 2 | 3 |
+| 1 | 2 | 3 |
+| 1 | 2 | 3 |
+
+This is a link [cool!](https://www.wikipedia.org/)
+
+[![the wikipedia globe](https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png)](https://www.wikipedia.org/)

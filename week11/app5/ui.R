@@ -9,7 +9,8 @@ fluidPage(
     sidebarPanel(
       selectInput("country", "Which Country do you live in?", 
                   choices = c("USA", "Canada")),
-      uiOutput("region")
+      uiOutput("region"),
+      uiOutput("whatever")
     ),
     
     mainPanel(

@@ -3,5 +3,5 @@
 library(shiny)
 
 function(input, output){
-  output$text <- renderText(input$slider1)
+  output$starfish <- renderText(input$slider1)
 }
