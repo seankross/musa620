@@ -16,3 +16,7 @@ questions about using Shiny please don't hesitate to get in touch with me. Two
 2. Test your app as your build it. Make small, incremental changes then run your
 app as often as is reasonable, that way if you break something about your app
 you can diagnose the problem quickly.
+
+## Office Hours
+
+[Click here](https://github.com/MUSA-620-Fall-2017/final-project/issues/2)
