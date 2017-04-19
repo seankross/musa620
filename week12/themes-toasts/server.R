@@ -1,4 +1,5 @@
 library(shiny)
+library(shinytoastr)
 
 function(input, output) {
   

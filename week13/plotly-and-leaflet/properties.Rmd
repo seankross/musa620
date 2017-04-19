@@ -1,0 +1,87 @@
+---
+title: "Philadelphia Property Explorer"
+runtime: shiny
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(leaflet)
+library(plotly)
+library(ggplot2)
+library(readr)
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Propert Taxes Paids & Home Value
+
+```{r}
+houses <- read_csv("houses.csv")
+
+output$price_by_tax <- renderPlotly({
+  tax_plot <- ggplot(houses) +
+    geom_point(aes(prop_tax, price)) +
+    theme_minimal() +
+    stat_smooth(aes(prop_tax, price), color = 'red', method = 'loess', se = FALSE) +
+    xlab("Property Taxes Paid (Thousands of $)") + 
+    ylab("Home Selling Price (Thousands of $)")
+  
+ggplotly(tax_plot, source = "plotly_data") %>%
+    layout(dragmode = 'lasso')
+})
+
+plotlyOutput('price_by_tax')
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Map
+
+```{r}
+selected_properties <- reactive({
+  selected_data <- event_data("plotly_selected", source = "plotly_data")
+  cat(str(selected_data))
+  if(is.null(selected_data) || length(selected_data) == 0){
+    houses
+  } else {
+    houses[selected_data$pointNumber,]
+  }
+})
+
+output$philly_map <- renderLeaflet({
+  houses %>%
+    leaflet() %>%
+    addTiles() %>%
+    setView(-75.2213925, 39.9544396, 13) %>%
+    addMarkers()
+})
+
+observe({
+  leafletProxy("philly_map") %>%
+    clearMarkers() %>%
+    addMarkers(lng = selected_properties()$lng,
+               lat = selected_properties()$lat)
+})
+
+leafletOutput("philly_map")
+```
+
+### Bedrooms
+
+```{r}
+output$brs <- renderPlotly({
+  bed_plot <- ggplot(selected_properties()) +
+    geom_bar(aes(bedrooms)) +
+    theme_minimal()
+  
+  ggplotly(bed_plot)
+})
+
+plotlyOutput('brs')
+```
